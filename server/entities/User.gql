@@ -7,4 +7,3 @@ type User @mongo(name: "users") {
   posts: [Post] @link(to: "user")
   comments: [Comment] @link(to: "user")
 }
-
