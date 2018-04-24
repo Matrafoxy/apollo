@@ -31,9 +31,13 @@ Meteor.startup(() => {
 });
 
 const QUERY = gql`
- {
+ query {
   posts(_id: "aninTvF8iYzGnRyzB") {
     _id
+    title
+    comments {
+      _id
+    }
   }
 }
 `;
@@ -43,12 +47,39 @@ const App = () => (
     {({data, loading, error}) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
-      //console.log(data);
-      return data.posts.map(({ _id, title }) => (
+     
+      return data.posts.map(({ _id, title, comments }) => (
         <div key={ _id }>
-          <p>{`${title}`}</p>
+          <p>{`${title}`}</p> 
+          <div>
+            <Comment comments={comments} />
+          </div>
         </div>
       ));
     }}
   </Query>
 );
+
+// const Comments = (props) => (
+//     <div>
+//         props.comments.map(({ _id }) => (
+//         <div key={ _id }>
+//             <p>{`${_id}`}</p>
+//         </div>
+//     ));
+//     </div>
+// );
+
+class Comment extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        return this.props.comments.map(({ _id }) => (
+            <div key={ _id }>
+                <p>{`${_id}`}</p>
+            </div>
+        ));
+    }
+}
