@@ -1,0 +1,10 @@
+type User @mongo(name: "users") {
+  _id: ID!
+  username: String
+  email: String
+  roles: [String]
+  groups: [Group] @link(field: "groupIds")
+  posts: [Post] @link(to: "user")
+  comments: [Comment] @link(to: "user")
+}
+

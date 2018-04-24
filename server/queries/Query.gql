@@ -1,0 +1,13 @@
+type Query {
+  users: [User],
+  posts(_id: String): [Post]
+}
+
+type Mutation {
+	 addPost(title: String!): ID,
+	  addCommentToPost: [Comment]
+}
+
+type Subscription {
+	 posts: [Post]
+}

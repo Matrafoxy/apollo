@@ -1,0 +1,7 @@
+type Comment @mongo(name: "comments")
+{
+  _id: ID!
+  text: String!
+  post: Post @link(field: "postId")
+  user: User @link(field: "userId")
+}
