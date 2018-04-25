@@ -4,15 +4,18 @@ export default {
    users(_, args, { db }, ast) {
       return db.users.astToQuery(ast).fetch();
     },
-    posts(_, args, { db }, ast) {
+    posts(_, {_id, title }, { db }, ast) {
+      //console.log(args);
       $filters = {};
-      // if (_id) {
-      //   $filters = { _id };
-      // }
+       if (_id) {
+        $filters = { _id };
+       }
+        else {
+        $filters = { title };
+       }
 
-      return db.posts.astToQuery(ast).fetch();
-      // but you can do whatever you want here since ctx.db.posts is a Mongo.Collection
-      // https://docs.meteor.com/api/collections.html
+       //console.log($filters);
+      return db.posts.astToQuery(ast, { $filters }).fetch();
     },
   },
   Mutation: {

@@ -1,6 +1,6 @@
 type Query {
   users: [User],
-  posts(_id: String): [Post]
+  posts(_id: ID, title: String): [Post]
 }
 
 type Mutation {
